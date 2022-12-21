@@ -88,7 +88,7 @@ namespace ADNPlugin.Revit.FileUpgrader
                 throw new InvalidOperationException("Could not open document.");
 
             BasicFileInfo fileInfo = BasicFileInfo.Extract(modelPath);
-            if (fileInfo.Format.Equals("2019"))
+            if (fileInfo.Format.Equals("2023"))
                 return;
 
             string pathName = doc.PathName;
@@ -119,6 +119,7 @@ namespace ADNPlugin.Revit.FileUpgrader
                     saveOpts.PreviewViewId = view.Id;
                 }
             }
+            Console.WriteLine("saving the output file: " + filePath);
             doc.SaveAs(path, saveOpts);
         }
 

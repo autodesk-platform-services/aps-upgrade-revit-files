@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////
 // Copyright (c) Autodesk, Inc. All rights reserved
-// Written by Forge Partner Development
+// Written by Autodesk Partner Development
 //
 // Permission to use, copy, modify, and distribute this software in
 // object code form for any purpose and without fee is hereby granted,
@@ -49,9 +49,11 @@ router.use(async (req, res, next) => {
     let credentials = await oauth.getInternalToken();
     let oauth_client = oauth.getClient();
 
-    req.oauth_client = oauth_client;
-    req.oauth_token = credentials;
-    next();
+    if(credentials ){
+        req.oauth_client = oauth_client;
+        req.oauth_token = credentials;
+        next();
+    }
 });
 
 

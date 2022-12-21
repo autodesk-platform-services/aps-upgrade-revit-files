@@ -6,7 +6,7 @@
     <ClientId>790FEF88-6114-480B-813B-41521A8C1C61</ClientId>
     <FullClassName>ADNPlugin.Revit.FileUpgrader.FileUpgradeApp</FullClassName>
     <Description>"Upgrade Revit files to lastest version."</Description>
-    <VendorId>Forge</VendorId>
+    <VendorId>aps</VendorId>
     <VendorDescription>Autodesk</VendorDescription>
   </AddIn>
 </RevitAddIns>

@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////
 // Copyright (c) Autodesk, Inc. All rights reserved
-// Written by Forge Partner Development
+// Written by Autodesk Partner Development
 //
 // Permission to use, copy, modify, and distribute this software in
 // object code form for any purpose and without fee is hereby granted,
@@ -158,6 +158,7 @@ function upgradeFile(inputUrl, outputUrl, projectId, createVersionData, fileExte
             body: workitemBody,
             json: true
         };
+        console.log(options);
 
         request(options, function (error, response, body) {
             if (error) {
@@ -405,7 +406,7 @@ function createPostWorkitemBody(inputUrl, outputUrl, fileExtension, access_token
     switch (fileExtension) {
         case 'rvt':
             body = {
-                activityId:  designAutomation.nickname + '.'+designAutomation.activity_name,
+                activityId:  designAutomation.nickname + '.'+designAutomation.activity_name+'+'+designAutomation.appbundle_activity_alias,
                 arguments: {
                     rvtFile: {
                         url: inputUrl,
@@ -429,7 +430,7 @@ function createPostWorkitemBody(inputUrl, outputUrl, fileExtension, access_token
             break;
         case 'rfa':
             body = {
-                activityId:  designAutomation.nickname + '.'+designAutomation.activity_name,
+                activityId:  designAutomation.nickname + '.'+designAutomation.activity_name+'+'+designAutomation.appbundle_activity_alias,
                 arguments: {
                     rvtFile: {
                         url: inputUrl,
@@ -453,7 +454,7 @@ function createPostWorkitemBody(inputUrl, outputUrl, fileExtension, access_token
             break;
         case 'rte':
             body = {
-                activityId:  designAutomation.nickname + '.'+designAutomation.activity_name,
+                activityId:  designAutomation.nickname + '.'+designAutomation.activity_name+'+'+designAutomation.appbundle_activity_alias,
                 arguments: {
                     rvtFile: {
                         url: inputUrl,
