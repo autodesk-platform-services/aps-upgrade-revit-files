@@ -68,6 +68,7 @@ Mac OSX/Linux (Terminal)
     export APS_WEBHOOK_URL=<<YOUR DESIGN AUTOMATION FOR REVIT CALLBACK URL>>
     export DESIGN_AUTOMATION_NICKNAME=<<YOUR DESIGN AUTOMATION FOR REVIT NICK NAME>>
     export DESIGN_AUTOMATION_ACTIVITY_NAME=<<YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY NAME>>
+    export DESIGN_AUTOMATION_ACTIVITY_ALIAS=<<YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY ALIAS>>    
     npm start
 
 Windows (use **Node.js command line** from Start menu)
@@ -79,6 +80,7 @@ Windows (use **Node.js command line** from Start menu)
     set APS_WEBHOOK_URL=<<YOUR DESIGN AUTOMATION FOR REVIT CALLBACK URL>>
     set DESIGN_AUTOMATION_NICKNAME=<<YOUR DESIGN AUTOMATION FOR REVIT NICK NAME>>
     set DESIGN_AUTOMATION_ACTIVITY_NAME=<<YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY NAME>>
+    set DESIGN_AUTOMATION_ACTIVITY_ALIAS=<<YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY ALIAS>>
     npm start
 
 **Note.**
@@ -88,7 +90,8 @@ environment variable examples:
 
 The following are optional:
 - DESIGN_AUTOMATION_NICKNAME: Only necessary if there is a nickname, APS client id by default.
-- DESIGN_AUTOMATION_ACTIVITY_NAME: Only necessary if the activity name is customized, ExportImportExcelActivity by default.
+- DESIGN_AUTOMATION_ACTIVITY_NAME: Only necessary if the activity name is customized, FileUpgraderAppActivity by default.
+- DESIGN_AUTOMATION_ACTIVITY_ALIAS: Only necessary if the activity alias is customized, dev by default.
 
 ### Using the app
 

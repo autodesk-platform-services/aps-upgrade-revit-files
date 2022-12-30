@@ -112,8 +112,6 @@ router.post('/da4revit/v1/upgrader/files', async (req, res, next) => {
             res.status(500).end('failed to create the storage');
             return;
         }
-        const outputUrl = storageInfo.StorageUrl;
-
 
         // get the storage of the input item version
         const versionInfo = await getLatestVersionInfo(projectId, resourceId, req.oauth_client, req.oauth_token);
@@ -122,7 +120,7 @@ router.post('/da4revit/v1/upgrader/files', async (req, res, next) => {
             res.status(500).end('failed to get lastest version of the file');
             return;
         }
-        const inputUrl = versionInfo.versionUrl;
+        const inputStorageId = versionInfo.versionStorageId;
 
         const createVersionBody = createBodyOfPostVersion(resourceId,fileItemName, storageInfo.StorageId, versionInfo.versionType);
         if (createVersionBody === null ) {
@@ -136,7 +134,7 @@ router.post('/da4revit/v1/upgrader/files', async (req, res, next) => {
         const oauth = new OAuth(req.session);
         const oauth_client = oauth.get2LeggedClient();;
         const oauth_token = await oauth_client.authenticate();
-        let upgradeRes = await upgradeFile(inputUrl, outputUrl, projectId, createVersionBody, fileExtension, req.oauth_token, oauth_token );
+        let upgradeRes = await upgradeFile(inputStorageId, storageInfo.StorageId, projectId, createVersionBody, fileExtension, req.oauth_token, oauth_token );
         if(upgradeRes === null || upgradeRes.statusCode !== 200 ){
             console.log('failed to upgrade the revit file');
             res.status(500).end('failed to upgrade the revit file');
@@ -199,7 +197,7 @@ router.post('/da4revit/v1/upgrader/files/:source_file_url/folders/:destinate_fol
             res.status(500).end('failed to get lastest version of the file');
             return;
         }
-        const inputUrl = versionInfo.versionUrl;
+        const inputStorageId = versionInfo.versionStorageId;
 
         const items = new ItemsApi();
         const sourceFile = await items.getItem(sourceProjectId, sourceFileId, req.oauth_client, req.oauth_token);
@@ -227,7 +225,6 @@ router.post('/da4revit/v1/upgrader/files/:source_file_url/folders/:destinate_fol
             res.status(500).end('failed to create the storage');
             return;
         }
-        const outputUrl = storageInfo.StorageUrl;
 
         const createFirstVersionBody = createBodyOfPostItem(fileName, destinateFolderId, storageInfo.StorageId, itemType, versionInfo.versionType)
         if (createFirstVersionBody === null) {
@@ -242,7 +239,7 @@ router.post('/da4revit/v1/upgrader/files/:source_file_url/folders/:destinate_fol
         const oauth = new OAuth(req.session);
         const oauth_client = oauth.get2LeggedClient();;
         const oauth_token = await oauth_client.authenticate();
-        let upgradeRes = await upgradeFile(inputUrl, outputUrl, destinateProjectId, createFirstVersionBody,fileExtension, req.oauth_token, oauth_token);
+        let upgradeRes = await upgradeFile(inputStorageId, storageInfo.StorageId, destinateProjectId, createFirstVersionBody,fileExtension, req.oauth_token, oauth_token);
         if (upgradeRes === null || upgradeRes.statusCode !== 200) {
             console.log('failed to upgrade the revit file');
             res.status(500).end('failed to upgrade the revit file');

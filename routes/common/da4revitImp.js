@@ -215,7 +215,7 @@ async function getLatestVersionInfo(projectId, fileId, oauth_client, oauth_token
         return null;
     }
     return {
-        "versionUrl": versionItem.relationships.storage.meta.link.href,
+        "versionStorageId": versionItem.relationships.storage.data.id,
         "versionType": versionItem.attributes.extension.type
     };
 }
@@ -252,17 +252,8 @@ async function getNewCreatedStorageInfo(projectId, folderId, fileName, oauth_cli
         console.log('failed to create a storage.');
         return null;
     }
-
-    // setup the url of the new storage
-    const strList = storage.body.data.id.split('/');
-    if (strList.length !== 2) {
-        console.log('storage id is not correct');
-        return null;
-    }
-    const storageUrl = "https://developer.api.autodesk.com/oss/v2/buckets/" + AUTODESK_HUB_BUCKET_KEY + "/objects/" + strList[1];
     return {
-        "StorageId": storage.body.data.id,
-        "StorageUrl": storageUrl
+        "StorageId": storage.body.data.id
     };
 }
 
